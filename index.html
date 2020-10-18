@@ -19,12 +19,11 @@
     <section class="weather wrapper">
         ​
         <!--/Where are you input-->
-        <div class="where-are-you">
-            <div>
-                <label for="city">Where are you?</label>
-                <input type="text" id="cities" name="city" placeholder="Enter City Name">
-            </div>
-            <button>Clear user data</button>
+        <div class="col-lg-3 bg-light">
+            <h5 class="mt-0">Search by City:</h5>
+            <div class="form-inline form-group">
+                <input class="form-control"  type="text" id="cityname" />
+                <button class="btn btn-light" id="search-button"> <i class="fa fa-search"></i></button>
         </div>
         ​
         <!--/City output with loader (for fun - could add to other elements)-->
@@ -44,6 +43,11 @@
         <!--/Daily forecast temperatures-->
         <div class="forecast">
             <div id="chart-container">Daily forecast chart</div>
+            <!--canvas element for where the chart will be rendered-->
+            <div class="chart" style="position: relative; height:50vh; width:50vw">
+                <canvas id="myChart"></canvas>
+              </div>
+        <!--end of canvas element for chart-->
         </div>
 
         <!--/Daily forecast-->
