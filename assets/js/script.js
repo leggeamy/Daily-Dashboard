@@ -6,14 +6,18 @@ function getNewsCategory() {
     var newsCategory = document.querySelector(".selected-news").textContent;
     console.log(newsCategory);
     getNews(newsCategory);
+    document.querySelector(".selected-news").classList.remove("selected-news");
 }
 
 function getNews() {
-    // var newsCategory = "politics";
+    // var newsCategory = "technology";
     var fromDate = moment().format("YYYY-MM-DD");
     console.log(fromDate);
     fetch(
-        `https://content.guardianapis.com/search?q=${newsCategory}&format=json&${fromDate}&show-fields=headline,byline,trailText,thumbnail,short-url&order-by-relevance${newsApiKey}`
+        "https://content.guardianapis.com/search?q=" + 
+        newsCategory +
+        "&format=json&${fromDate}&show-fields=headline,byline,trailText,thumbnail,short-url&order-by-relevance" +
+        newsApiKey
     ).then(function (response) {
         return response.json();
     }).then(function (articles) {
@@ -40,7 +44,7 @@ function getNews() {
             articleHeadlineEl.textContent = articles.response.results[i].fields.headline;
             articleAuthorEl.textContent = articles.response.results[i].fields.byline;
             articleImgEl.setAttribute("src", articles.response.results[i].fields.thumbnail);
-            articleSummaryEl.textContent = articles.response.results[i].fields.trailText;
+            articleSummaryEl.innerHTML = articles.response.results[i].fields.trailText;
             articleLinkEl.setAttribute("href", articles.response.results[i].fields.shortUrl);
             articleLinkEl.setAttribute("target", "_blank");
             articleLinkEl.innerText = "CLICK TO READ";
@@ -166,7 +170,7 @@ document.querySelector("#search-button").addEventListener("click", function (e) 
 
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
     e.preventDefault();
-    e.target.classList.add("selected-news");    
+    e.target.classList.add("selected-news");
     getNewsCategory();
 });
 
