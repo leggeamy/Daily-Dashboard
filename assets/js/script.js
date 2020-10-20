@@ -186,7 +186,8 @@ window.onload = function () {
         getNews(newsCategory)
     }
     else {
-        document.querySelector(".carousel-inner").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>"
+        document.querySelector("#carousel-first-slide").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
+        document.querySelector("#carousel-second-slide").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
     };
 };
 
