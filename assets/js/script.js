@@ -146,4 +146,8 @@ document.querySelector("#search-button").addEventListener("click", function(e) {
 
 getNews();
 
-import { Drawer } from '@material-ui/core'
+//collapsible drawer section//
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, options);
+  });
