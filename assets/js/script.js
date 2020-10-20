@@ -1,4 +1,5 @@
 
+
 var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
 
 
@@ -60,6 +61,8 @@ function makeRow(cityName) {
     }
     historyEl.appendChild(liEl);
 };
+
+
 
 //fetch weather forecast data for that city from open weather API
 
@@ -143,3 +146,7 @@ document.querySelector("#search-button").addEventListener("click", function(e) {
 
 getNews();
 
+//collapsible drawer section//
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
