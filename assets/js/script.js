@@ -3,21 +3,26 @@ var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
 
 // Find user selected news category
 function getNewsCategory() {
+    // get news button with class selected-news
     var newsCategory = document.querySelector(".selected-news").textContent;
-    console.log(newsCategory);
+    // Store most recentNewsCategory to local storage
+    localStorage.setItem("recentNewsCategory", newsCategory);
+    // Call getNews fuction and pass newsCategory
     getNews(newsCategory);
+    // Remove class selected-news from clicked button
     document.querySelector(".selected-news").classList.remove("selected-news");
 }
 
-function getNews() {
-    // var newsCategory = "technology";
+function getNews(newsCategory) {
+    // clear news slides
+    document.querySelector("#carousel-first-slide").textContent = "";
+    document.querySelector("#carousel-second-slide").textContent = "";
+    // store current day
     var fromDate = moment().format("YYYY-MM-DD");
     console.log(fromDate);
+    // get news for selected newsCategory fromDate
     fetch(
-        "https://content.guardianapis.com/search?q=" + 
-        newsCategory +
-        "&format=json&${fromDate}&show-fields=headline,byline,trailText,thumbnail,short-url&order-by-relevance" +
-        newsApiKey
+        `https://content.guardianapis.com/search?q=${newsCategory}&format=json&${fromDate}&show-fields=headline,byline,trailText,thumbnail,short-url&order-by-relevance&${newsApiKey}`
     ).then(function (response) {
         return response.json();
     }).then(function (articles) {
@@ -161,7 +166,7 @@ function getForecast(cityName) {
             })()
 
         })
-}
+};
 
 document.querySelector("#search-button").addEventListener("click", function (e) {
     e.preventDefault();
@@ -173,4 +178,15 @@ document.querySelector("#myBtnContainer").addEventListener("click", function (e)
     e.target.classList.add("selected-news");
     getNewsCategory();
 });
+
+window.onload = function () {
+    newsCategory = localStorage.getItem("recentNewsCategory");
+    console.log(newsCategory);
+    if(newsCategory) {
+        getNews(newsCategory)
+    }
+    else {
+        document.querySelector(".carousel-inner").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>"
+    };
+};
 
