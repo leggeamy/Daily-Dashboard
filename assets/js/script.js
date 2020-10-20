@@ -147,7 +147,6 @@ document.querySelector("#search-button").addEventListener("click", function(e) {
 getNews();
 
 //collapsible drawer section//
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems, options);
+$(document).ready(function(){
+    $('.collapsible').collapsible();
   });
