@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    
     <title>Daily-Dashboard</title>
 </head>
 ​
@@ -19,14 +22,16 @@
     <section class="weather wrapper">
         ​
         <!--/Where are you input-->
-        <div class="col-lg-3 bg-light">
-            <h5 class="mt-0">Search by City:</h5>
-            <div class="form-inline form-group">
-                <input class="form-control"  type="text" id="cityname" />
-                <button class="btn btn-light" id="search-button"> <i class="fa fa-search"></i></button>
+        <div>
+            <h5>Search by City:</h5>
+            <div>
+                <input type="text" id="cityname" />
+                <Button variant="contained" id="search-button">search</Button>
+             </div>
         </div>
 
         <ul class="list-group history"></ul>   
+
         ​
         <!--/City output with loader (for fun - could add to other elements)-->
         <div class="city weather output">
@@ -46,7 +51,7 @@
         <div class="forecast">
             <div id="chart-container">Daily forecast chart</div>
             <!--canvas element for where the chart will be rendered-->
-            <div class="chart" style="position: relative; height:50vh; width:50vw">
+            <div class="chart" style="position: relative; height:50vh; width:50vw"><!--need to move this styling to css file-->
                 <canvas id="myChart"></canvas>
               </div>
         <!--end of canvas element for chart-->

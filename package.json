@@ -1,0 +1,23 @@
+{
+  "name": "Daily-Dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "module",
+    "url": "git+https://github.com/leggeamy/Daily-Dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leggeamy/Daily-Dashboard/issues"
+  },
+  "homepage": "https://github.com/leggeamy/Daily-Dashboard#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0"
+  }
+}
