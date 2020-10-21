@@ -73,3 +73,6 @@ var modal_init = function()
     document.getElementById("modal_form").attachEvent("onsubmit", checkForm);
     window.attachEvent("onload", modal_init);
   }
+
+localStorage.setItem('name', "");
+localStorage.setItem('city', "");
