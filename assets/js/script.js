@@ -93,6 +93,8 @@ function makeRow(cityName) {
     historyEl.appendChild(liEl);
 };
 
+
+
 //fetch weather forecast data for that city from open weather API
 
 function getForecast(cityName) {
@@ -191,3 +193,7 @@ window.onload = function () {
     };
 };
 
+//collapsible drawer section//
+$(document).ready(function(){
+    $('.collapsible').collapsible();
+  });

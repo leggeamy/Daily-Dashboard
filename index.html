@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" />
+    ​<script src="https://code.jquery.com/jquery-3.5.1.min.js"   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Daily-Dashboard</title>
 </head>
 
@@ -14,28 +19,32 @@
         <h1>Amy Legge</h1>
     </header>
     ​
-    <section class="weather wrapper"> ​
-        <!-- Where are you input -->
-        <div class="col-lg-3 bg-light">
-            <h5 class="mt-0">Search by City:</h5>
-            <div class="form-inline form-group">
-                <input class="form-control" type="text" id="cityname" />
-                <button class="btn btn-light" id="search-button"> <i class="fa fa-search"></i></button>
-            </div>
+    <section class="weather wrapper">
+        ​
+        <!--/Where are you input-->
+        <div>
+            <h5>Search by City:</h5>
+            <div>
+                <input type="text" id="cityname" />
+                <Button variant="contained" id="search-button">search</Button>
+             </div>
+        </div>
 
-            <ul class="list-group history"></ul>
-            ​
-            <!--/City output with loader (for fun - could add to other elements)-->
-            <div class="city weather output">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status" id="loading">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
-                <div class="output-data">
-                    <h2>Today's Date</h2>
-                    <h1>Today's temperature</h1>
-                    <h2>Today's weather</h2>
+        <!--attempt at collapsible drawer for "favourite" (recently searched) cities-->
+        <ul class="collapsible">
+            <li>
+              <div class="collapsible-header"><i class="material-icons">favourites</i></div>
+              <div class="collapsible-body"><span>
+                  <ul class="list-group history"></ul></span></div>
+            </li>
+        </ul> 
+
+        ​
+        <!--/City output with loader (for fun - could add to other elements)-->
+        <div class="city weather output">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status" id="loading">
+                    <span class="sr-only">Loading...</span>
                 </div>
             </div>
             ​
@@ -48,11 +57,27 @@
                 </div>
                 <!--end of canvas element for chart-->
             </div>
+        </div>
+        ​
+        <!--/Daily forecast temperatures-->
+        <div class="forecast">
+            <div id="chart-container">Daily forecast chart</div>
+            <!--canvas element for where the chart will be rendered-->
+            <div class="chart" style="position: relative; height:50vh; width:50vw"><!--need to move this styling to css file-->
+                <canvas id="myChart"></canvas>
+              </div>
+        <!--end of canvas element for chart-->
+        </div>
 
             <!--/Daily forecast-->
             <div class="forecast-wrapper">
                 <h2 class="daily-forecast-temperatures">Weather</h2>
             </div>
+        </div>
+        <div class="output-data">
+            <h2>Today's Date</h2>
+            <h1>Today's temperature</h1>
+            <h2>Today's weather</h2>
         </div>
     </section>
     ​
@@ -86,19 +111,17 @@
             <!-- Carousel slides -->
             <div class="carousel-inner" role="listbox"> ​
                 <!-- Carousel first slide -->
-                <div id="carousel-first-slide" class="carousel-item active"> ​
+                <div id="carousel-first-slide" class="carousel-item-mine active"> ​
                     <!-- First two news articles go here -->
                 </div>
                 <!-- carousel second slide -->
-                <div id="carousel-second-slide" class="carousel-item"> ​
+                <div id="carousel-second-slide" class="carousel-item-mine"> ​
                     <!-- Second two news articles go here -->
                 </div>
             </div>
         </div>
     </section>
-    ​
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
-        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
