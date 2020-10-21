@@ -58,7 +58,7 @@
                     
                     <div class="forecast" id="chart-container">
                     <!--canvas element for the chart-->
-                    <div class="chart" style="position: relative; height:80vh; width:50vw"><!--need to move this styling to css file-->
+                    <div class="chart">
                         <canvas id="myChart"></canvas>
                     </div>
                 </div>
@@ -68,8 +68,11 @@
             </div>
 
     </section>
-    ​
-    <section class="news wrapper"> ​
+  
+<div class="row 3">  ​
+    <section class="news wrapper"> 
+        <div class="col s4"​>
+        
         <!-- Filter buttons -->
         <div id="myBtnContainer">
             <h2 class>News Categories</h2>
@@ -80,35 +83,45 @@
             <button class="btn">Politics</button>
         </div>
 
-        <!-- Carousel wrapper -->
-        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel"> ​
-            <!-- Carousel controls -->
-            <div class="controls-side">
-                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i
-                        class="fas fa-chevron-left"></i></a>
-                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-                        class="fas fa-chevron-right"></i></a>
-            </div>
+                            <!-- Carousel wrapper -->
+                            <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel"> ​
+                                <!-- Carousel controls -->
+                                <div class="controls-side">
+                                    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i
+                                            class="fas fa-chevron-left"></i></a>
+                                    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                                            class="fas fa-chevron-right"></i></a>
+                                </div>
             ​
-            <!-- Carousel indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                <li data-target="#multi-item-example" data-slide-to="1"></li>
-            </ol>
+                                <!-- Carousel indicators -->
+                                <ol class="carousel-indicators">
+                                    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                                    <li data-target="#multi-item-example" data-slide-to="1"></li>
+                                </ol>
             ​
-            <!-- Carousel slides -->
-            <div class="carousel-inner" role="listbox"> ​
-                <!-- Carousel first slide -->
-                <div id="carousel-first-slide" class="carousel-item-mine active"> ​
-                    <!-- First two news articles go here -->
-                </div>
-                <!-- carousel second slide -->
-                <div id="carousel-second-slide" class="carousel-item-mine"> ​
-                    <!-- Second two news articles go here -->
-                </div>
-            </div>
-        </div>
+                                    <!-- Carousel slides -->
+                                    <div class="col s8"​>
+                                        <div class="carousel-inner" role="listbox"> ​
+                                            
+                                            <!-- Carousel first slide -->
+                                            <div id="carousel-first-slide" class="carousel-item"> ​
+                                            
+                                                <!-- First two news articles go here -->
+                                            </div>
+                                            
+                                            <!-- carousel second slide -->
+                                            <div id="carousel-second-slide" class="carousel-item"> ​
+                                                <!-- Second two news articles go here -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+    </div>
+    </div>
     </section>
+</div>
+</div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
