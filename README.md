@@ -1,6 +1,6 @@
 # Daily-Dashboard
 
-## This WebApp allows a user to see the some Weather and a few News Headlines in a simple single page design. It can provide some information that can prove useful in planning a work day or a trip
+## This WebApp allows a user to see the some Weather information and a few News Headlines in a simple single page design. It can provide some information that can prove useful in planning a work day or a trip
 
 **Key Features:**
 1. User is prompted to provide their name and current city on their first visit to the WebApp.
