@@ -11,10 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Daily-Dashboard</title>
 </head>
-​
 
-<body>
-    ​
+<body> ​
     <header>
         <h2>Welcome back, Amy!</h2>
         <h3>Check out today's weather and news</h3>
@@ -37,10 +35,9 @@
             <li>
               <div class="collapsible-header"><i class="material-icons">favourites</i></div>
               <div class="collapsible-body"><span>
-                  <ul class="list-group history"/ul></span></div>
+                  <ul class="list-group history"></ul></span></div>
             </li>
-          </ul>
-  
+        </ul> 
 
         ​
         <!--/City output with loader (for fun - could add to other elements)-->
@@ -50,10 +47,15 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
-            <div class="output-data">
-                <h2>Today's Date</h2>
-                <h1>Today's temperature</h1>
-                <h2>Today's weather</h2>
+            ​
+            <!--/Daily forecast temperatures-->
+            <div class="forecast">
+                <div id="chart-container">Daily forecast chart</div>
+                <!--canvas element for where the chart will be rendered-->
+                <div class="chart" style="position: relative; height:50vh; width:50vw">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <!--end of canvas element for chart-->
             </div>
         </div>
         ​
@@ -67,94 +69,63 @@
         <!--end of canvas element for chart-->
         </div>
 
-        <!--/Daily forecast-->
-        <div class="forecast-wrapper">
-            <h2 class="daily-forecast-temperatures">Weather</h2>
+            <!--/Daily forecast-->
+            <div class="forecast-wrapper">
+                <h2 class="daily-forecast-temperatures">Weather</h2>
+            </div>
+        </div>
+        <div class="output-data">
+            <h2>Today's Date</h2>
+            <h1>Today's temperature</h1>
+            <h2>Today's weather</h2>
         </div>
     </section>
     ​
-    <section class="news wrapper"></section>
-    ​
-    <!--/Filter buttons-->
-    <div id="myBtnContainer">
-        <h2 class>News Categories</h2>
-        <button class="btn active" onclick="filterSelection('technology')">Technology</button>
-        <button class="btn" onclick="filterSelection('politics')">Business</button>
-        <button class="btn" onclick="filterSelection('business')">Crime</button>
-        <button class="btn" onclick="filterSelection('crime')">Finance</button>
-        <button class="btn" onclick="filterSelection('finance')">Politics</button>
-    </div>
+    <section class="news wrapper"> ​
+        <!-- Filter buttons -->
+        <div id="myBtnContainer">
+            <h2 class>News Categories</h2>
+            <button class="btn">Technology</button>
+            <button class="btn">Business</button>
+            <button class="btn">Crime</button>
+            <button class="btn">Finance</button>
+            <button class="btn">Politics</button>
+        </div>
 
-    <!--/Carousel wrapper-->
-    <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-        ​
-        <!--/Carousel controls-->
-        <div class="controls-side">
-            <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fas fa-chevron-left"></i></a>
-            <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-                    class="fas fa-chevron-right"></i></a>
-        </div>
-        ​
-        <!--/Carousel indicators-->
-        <ol class="carousel-indicators">
-            <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-            <li data-target="#multi-item-example" data-slide-to="1"></li>
-        </ol>
-        ​
-        <!--/Carousel slides-->
-        <div class="carousel-inner" role="listbox">
-            ​
-            <!--/Carousel first slide-->
-            <div class="carousel-item active">
-                ​
-                <div class="card1">
-                    <div class="container">
-                        <h3>Headline</h3>
-                        <h4>Author</h4>
-                    </div>
-                    <img src="???" alt="news-pic" style="width:100%">
-                    <p>Article Text</p>
-                    <a href="url">link text</a>
-                </div>
-                ​
-                <div class="card2">
-                    <div class="container">
-                        <h3>Headline</h3>
-                        <h4>Author</h4>
-                    </div>
-                    <img src="???" alt="news-pic" style="width:100%">
-                    <p>Article Text</p>
-                    <a href="url">link text</a>
-                </div>
+        <!-- Carousel wrapper -->
+        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel"> ​
+            <!-- Carousel controls -->
+            <div class="controls-side">
+                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i
+                        class="fas fa-chevron-left"></i></a>
+                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
+                        class="fas fa-chevron-right"></i></a>
             </div>
             ​
-            <!--/.carousel second slide-->
-            <div class="carousel-item"></div>
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                <li data-target="#multi-item-example" data-slide-to="1"></li>
+            </ol>
             ​
-            <div class="card3">
-                <div class="container">
-                    <h3>Headline</h3>
-                    <h4>Author</h4>
+            <!-- Carousel slides -->
+            <div class="carousel-inner" role="listbox"> ​
+                <!-- Carousel first slide -->
+                <div id="carousel-first-slide" class="carousel-item-mine active"> ​
+                    <!-- First two news articles go here -->
                 </div>
-                <img src="???" alt="news-pic" style="width:100%">
-                <p>Article Text</p>
-                <a href="url">link text</a>
-            </div>
-            ​
-            <div class="card4">
-                <div class="container">
-                    <h3>Headline</h3>
-                    <h4>Author</h4>
+                <!-- carousel second slide -->
+                <div id="carousel-second-slide" class="carousel-item-mine"> ​
+                    <!-- Second two news articles go here -->
                 </div>
-                <img src="???" alt="news-pic" style="width:100%">
-                <p>Article Text</p>
-                <a href="url">link text</a>
             </div>
         </div>
-    </div>
     </section>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+        crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
     ​
 </body>
