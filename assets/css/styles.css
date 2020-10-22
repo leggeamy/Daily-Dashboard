@@ -139,3 +139,10 @@
     width: 100%;
     padding: 40px 35px;
     }
+
+  .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+
