@@ -139,3 +139,21 @@
     width: 100%;
     padding: 40px 35px;
     }
+
+  .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+  }
+
+/* .btn-floating {
+  bottom: 5px;
+} */
+
+/* .findbtn { */
+  /* bottom: 5px; !important;
+} */
+
+.btn-floating.halfway-fab {
+  bottom: 5px !important;
+}
