@@ -1,6 +1,9 @@
 // Store API Key in a variable
 var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
 
+// // Container to store Favourite cities in local storage
+// var favCities = [];
+
 // Find user selected news category
 function getNewsCategory() {
     // get news button with class selected-news
@@ -70,11 +73,28 @@ function getNews(newsCategory) {
 //get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
-    if (localStorage.getItem(favCities)) {
-
-    }
     getForecast(cityName);
     makeRow(cityName);
+    if (localStorage.getItem(favCities)) {
+        var favCities = JSON.parse(localStorage.getItem(favCities));
+        console.log(favCities);
+        if (favCities.length >= 5) {
+            favCities.pop();
+            favCities.push(cityName);
+            console.log(favCities);
+            localStorage.setItem("favCities", JSON.stringify(favCities));
+        }
+        else {
+            favCities.push(cityName);
+            console.log(favCities);
+            localStorage.setItem("favCities", JSON.stringify(favCities));
+        }
+    }
+    else {
+        var favCities = [];
+        favCities.push(cityName);
+        localStorage.setItem("favCities", JSON.stringify(favCities));
+    }
 }
 
 //make rows of searched cities (clickable)
@@ -190,7 +210,6 @@ window.onload = function () {
     else {
         var newsPromptContainerEl = document.querySelector("#article-display");
         var newsPromptEl = document.createElement("h4");
-        newsPromptEl.classList.add("prompt-center");
         newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
         newsPromptContainerEl.appendChild(newsPromptEl);
     };
