@@ -4,128 +4,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" />
-    ​<script src="https://code.jquery.com/jquery-3.5.1.min.js"   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A=="
+        crossorigin="anonymous" />    ​
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Daily-Dashboard</title>
 </head>
 
-<body> 
+<body>
     <header>
+        <nav>
+            <h2>Daily Dashboard</h2>
+            <h4>Check out today's weather and news</h4>
+            <p><button id="modal_open">User Info</button></p>
 
-        <h2>Daily Dashboard</h2>
+            <div id="modal_wrapper">
+                <div id="modal_window">
+                    <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
 
-        <h4>Check out today's weather and news</h4>
-        
-        <p><button id="modal_open">Welcome!</button></p>
+                    <p>Complete the form below:</p>
 
-        <div id="modal_wrapper">
-        <div id="modal_window">
+                    <form id="modal_form" method="POST" action="#" accept-charset="UTF-8">
+                        <p><label>Your Name<strong>*</strong><br>
+                                <input type="text" autofocus required size="48" name="name" value=""></label></p>
+                        <p><label>Your City<strong>*</strong><br>
+                                <input type="text" required title="Please enter your city" size="48" name="city"
+                                    value=""></label></p>
+                        <p><input type="submit" name="modal_form" value="Submit"></p>
+                    </form>
 
-            <div style="text-align: right;"><a id="modal_close" href="#">close <b>X</b></a></div>
-
-            <p>Complete the form below:</p>
-
-            <form id="modal_form" method="POST" action="#" accept-charset="UTF-8">
-            <p><label>Your Name<strong>*</strong><br>
-            <input type="text" autofocus required size="48" name="name" value=""></label></p>
-            <p><label>Your City<strong>*</strong><br>
-            <input type="text" required title="Please enter your city" size="48" name="city" value=""></label></p>
-            <p><input type="submit" name="modal_form" value="Submit"></p>
-            </form>
-
-            </div> <!-- #modal_window -->
+                </div> <!-- #modal_window -->
             </div> <!-- #modal_wrapper -->
+        </nav>
 
     </header>
-    ​
-    <section id="weather_wrapper">
+    <!-- Page Layout here -->
+    <section id="weather" class="row">
 
-        <h3>Weather</h3>
-        ​
+      <div class="col s12 m4 l2">
+        <!-- <h3>Weather</h3> -->        ​
         <div id="weather-search">
             <!--/Where are you input-->
-            <h5>Search by City:</h5>
-                <div>
-                    <input type="text" id="cityname" />
-                    <Button variant="contained" id="search-button">search</Button>
-                </div>
-        </div>
-
+            <div>
+                <h5>
+                    Search by City:
+                </h5>                
+                <input type="text" id="cityname" />
+                <Button variant="contained" id="search-button" class="btn">Search</Button>
+            </div>
             <!--attempt at collapsible drawer for "favourite" (recently searched) cities-->
             <ul class="collapsible">
                 <li>
-                <div class="collapsible-header"><i class="material-icons">favourites</i></div>
-                <div class="collapsible-body"><span>
-                    <ul class="list-group history"></ul></span></div>
+                    <div class="collapsible-header"><i class="material-icons">Favourites</i></div>
+                    <div class="collapsible-body"><span>
+                            <ul class="list-group history"></ul>
+                        </span></div>
                 </li>
-            </ul> 
+            </ul>
         </div>
-        ​
+      </div>
+
+      <div class="col s12 m8 l10">
         <!--/Daily forecast temperatures-->
-        <div class="weather-forecast">
+        <div class="weather-forecast" class="col s12">
             <div id="chart-container">Daily forecast chart</div>
             <!--canvas element for where the chart will be rendered-->
-            <div class="chart" style="position: relative; height:50vh; width:50vw"><!--need to move this styling to css file-->
+            <div class="chart">
+                <!--need to move this styling to css file-->
                 <canvas id="myChart"></canvas>
-              </div>
-        <!--end of canvas element for chart-->
-        </div>
-    ​
-    <section class="news-wrapper"> ​
-
-        <h3>News</h3>
-
-        <!-- Filter buttons -->
-        <div id="myBtnContainer">
-            <h2 class>News Categories</h2>
-            <button class="btn">Technology</button>
-            <button class="btn">Business</button>
-            <button class="btn">Crime</button>
-            <button class="btn">Finance</button>
-            <button class="btn">Politics</button>
-        </div>
-
-        <!-- Carousel wrapper -->
-        <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel"> ​
-            <!-- Carousel controls -->
-            <div class="controls-side">
-                <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i
-                        class="fas fa-chevron-left"></i></a>
-                <a class="btn-floating" href="#multi-item-example" data-slide="next"><i
-                        class="fas fa-chevron-right"></i></a>
             </div>
-            ​
-            <!-- Carousel indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-                <li data-target="#multi-item-example" data-slide-to="1"></li>
-            </ol>
-            ​
-            <!-- Carousel slides -->
-            <div class="carousel-inner" role="listbox"> ​
-                <!-- Carousel first slide -->
-                <div id="carousel-first-slide" class="carousel-item-mine active"> ​
-                    <!-- First two news articles go here -->
+        </div>
+        <!--end of canvas element for chart-->
+      </div>
+
+    </section>
+
+    <section id="news" class="row">​
+        <div class="col s12 m4 l2"> 
+            <!-- <h3>News</h3> -->
+            <!-- Filter buttons -->
+            <div id="myBtnContainer" class="col s12">
+                <h5 class>News Categories</h5>
+                <button class="btn">Technology</button>
+                <button class="btn">Business</button>
+                <button class="btn">Crime</button>
+                <button class="btn">Finance</button>
+                <button class="btn">Politics</button>
+            </div>
+        </div>
+            
+        <div class="col s12 m8 l10">
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <span class="card-title">Card Title</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                            class="material-icons">add</i></a>
                 </div>
-                <!-- carousel second slide -->
-                <div id="carousel-second-slide" class="carousel-item-mine"> ​
-                    <!-- Second two news articles go here -->
+                <div class="card-content">
+                    <p>I am a very simple card. I am good at containing small bits of information. I am
+                        convenient because I require little markup to use effectively.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="images/sample-1.jpg">
+                    <span class="card-title">Card Title</span>
+                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i
+                            class="material-icons">add</i></a>
+                </div>
+                <div class="card-content">
+                    <p>I am a very simple card. I am good at containing small bits of information. I am
+                        convenient because I require little markup to use effectively.</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <script src="./assets/js/form.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-        crossorigin="anonymous"></script>
-    <script src="./assets/js/script.js"></script>
-    ​
+
+        <script src="./assets/js/form.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous"></script>
+        <script src="./assets/js/script.js"></script>
+        ​
+    </div>
 </body>
 <footer>
     &copy;2020 by Team One
