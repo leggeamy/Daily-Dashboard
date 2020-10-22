@@ -70,6 +70,84 @@ function getNews(newsCategory) {
     })
 };
 
+//DAILY WEATHER FUNCTION -- > *not currently working, no errors in dev console* <--
+var getWeatherData = function(cityname) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=imperial")
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log(data)
+
+        //clear any old content
+        todayEl = document.querySelector("#today");
+        todayEl.textContent = " ";
+        
+        //create html content for current weather
+        var titleEl = document.createElement("h3")
+        titleEl.classList.add("card-title");
+        titleEl.textContent = data.name + " (" + new Date().toLocaleDateString() + ")";
+        var cardEl = document.createElement("div");
+        cardEl.classList.add("card");
+        var windEl = document.createElement("p");
+        windEl.classList.add("card-text");
+        var humidEl = document.createElement("p");
+        humidEl.classList.add("card-text");
+        var tempEl = document.createElement("p");
+        tempEl.classList.add("card-text");
+        humidEl.textContent = "Humidity: " + data.main.humidity + " %";
+        tempEl.textContent = "Temperature: " + data.main.temp + " °F";
+        var cardBodyEl = document.createElement("div");
+        cardBodyEl.classList.add("card-body");
+        var imgEl = document.createElement("img");
+        imgEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+
+        titleEl.appendChild(imgEl)
+        cardBodyEl.appendChild(titleEl);
+        cardBodyEl.appendChild(tempEl);
+        cardBodyEl.appendChild(humidEl);
+        cardBodyEl.appendChild(windEl);
+        cardEl.appendChild(cardBodyEl);
+        todayEl.appendChild(cardEl);
+
+        getForecast(cityname);
+        getUVIndex(data.coord.lat, data.coord.lon);
+    }
+)}
+
+function getUVIndex(lat, lon) {
+    fetch("https://api.openweathermap.org/data/2.5/uvi?appid=ed3ceecb82da99a626e9f6aef02e2dbb&lat=" + lat + "&lon=" + lon)
+    .then(function(response){
+        return response.json();
+    }).then(function(data) {
+        var bodyEl = document.querySelector(".card-body");
+        var uvEl = document.createElement("p");
+        uvEl.textContent = "UV Index: "
+        var buttonEl = document.createElement("span");
+        buttonEl.classList.add("btn", "btn-sm");
+        buttonEl.innerHTML = data.value;
+
+        if (data.value < 3) {
+            buttonEl.classList.add("btn-success");
+        }
+        else if (data.value < 7) {
+            buttonEl.classList.add("btn-warning");
+        }
+        else {
+            buttonEl.classList.add("btn-danger");
+        }
+
+        bodyEl.appendChild(uvEl);
+        uvEl.appendChild(buttonEl);
+    })
+}
+
+document.querySelector("#search-button").addEventListener("click", function(e) {
+    e.preventDefault()
+    getCityName();
+});
+
+// FORECAST CHART FUNCTION
 //get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
@@ -198,6 +276,8 @@ $(document).ready(function(){
     $('.collapsible').collapsible();
   });
 
+  //carousel section//
   $(document).ready(function(){
     $('.carousel').carousel();
   });
+
