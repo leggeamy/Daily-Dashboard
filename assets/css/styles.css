@@ -9,7 +9,7 @@
   }
 
   nav {
-    background-color: #985EFF;
+    background-color: #26a69a;
   }
 
   .nav-wrapper {
@@ -89,7 +89,7 @@
 
   #weather-search {
     margin: 3.5%;
-    color: rgb(96, 8, 131);
+    color: rgb(0, 0, 0);
     font-size: 18px;
     line-height: 1.3;
   }
@@ -121,7 +121,7 @@
   }
 
   .collapsible {
-    background-color: #6200EE;
+    background-color: #73ccc3;
   }
 
   #cityname {
@@ -135,7 +135,7 @@
     }
     
   footer {
-    background: #985EFF;
+    background: #26a69a;
     width: 100%;
     padding: 40px 35px;
     }
