@@ -51,6 +51,7 @@ function getNews(newsCategory) {
             newsCardTitleEl.classList.add("card-title");
             newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
             newsCardBtnIconEl.classList.add("material-icons");
+            newsCardBtnIconEl.textContent="add"
             newsCardSummaryContainerEl.classList.add("card-content");
 
             // combine DOM Elements and add  to container
