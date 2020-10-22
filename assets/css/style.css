@@ -10,34 +10,23 @@
 
   header {
     background: #985EFF;
-    padding: 20px 35px;
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
   }
 
-  a {
-    colour: white;
-    font-style: normal;
-    font-weight: normal;
+  h2 {
+    color: white;
+    text-align: left;
   }
 
-  header h4 {
+  h4 {
     font-size: 36px;
     color: white;
-    margin: 0;
-    font-style: normal;
-    font-weight: normal;
     line-height: 24px;
     letter-spacing: 0.15px;
     text-align: right;
-  }
-
-  #modal-open {
-    
-  }
-
-  p {
-    color: #985EFF 
   }
 
   section {
@@ -136,8 +125,6 @@
     letter-spacing: 0.15px;
     color: rgba(0, 0, 0, 0.87); 
   }
-
- 
 
   #cityname {
     font-family: Roboto;

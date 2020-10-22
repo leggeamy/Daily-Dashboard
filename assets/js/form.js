@@ -2,13 +2,13 @@ var checkForm = function(e)
 {
   var form = (e.target) ? e.target : e.srcElement;
   if(form.name.value == "") {
-    alert("Please enter your Name");
+    alert("Please enter your name");
     form.name.focus();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
     return;
   }
   if(form.city.value == "") {
-    alert("Please enter your City");
+    alert("Please enter your city");
     form.city.focus();
     e.preventDefault ? e.preventDefault() : e.returnValue = false;
     return;
@@ -74,5 +74,4 @@ var modal_init = function()
     window.attachEvent("onload", modal_init);
   }
 
-localStorage.setItem('name', "");
 localStorage.setItem('city', "");
