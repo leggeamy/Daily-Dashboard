@@ -50,6 +50,7 @@ function getNews(newsCategory) {
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
             newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
+            newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
             newsCardSummaryContainerEl.classList.add("card-content");
 
@@ -69,6 +70,9 @@ function getNews(newsCategory) {
 //get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
+    if (localStorage.getItem(favCities)) {
+
+    }
     getForecast(cityName);
     makeRow(cityName);
 }
@@ -184,7 +188,11 @@ window.onload = function () {
         getNews(newsCategory)
     }
     else {
-        document.querySelector("#artice-display").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
+        var newsPromptContainerEl = document.querySelector("#article-display");
+        var newsPromptEl = document.createElement("h4");
+        newsPromptEl.classList.add("prompt-center");
+        newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
+        newsPromptContainerEl.appendChild(newsPromptEl);
     };
 };
 
