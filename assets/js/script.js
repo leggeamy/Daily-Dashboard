@@ -15,8 +15,7 @@ function getNewsCategory() {
 
 function getNews(newsCategory) {
     // clear news slides
-    document.querySelector("#carousel-first-slide").textContent = "";
-    document.querySelector("#carousel-second-slide").textContent = "";
+    document.querySelector("#article-display").textContent = "";
     // store current day
     var fromDate = moment().format("YYYY-MM-DD");
     console.log(fromDate);
@@ -28,44 +27,41 @@ function getNews(newsCategory) {
     }).then(function (articles) {
         console.log(articles);
         for (i = 0; i < 4; i++) {
-            if (i < 2) {
-                // create DOM Elements used to display news articles on page
-                var newsContainerEl = document.querySelector("#carousel-first-slide");
-                newsContainerEl.classList.add("carousel-item", "active");
-            }
-            else {
-                var newsContainerEl = document.querySelector("#carousel-second-slide");
-                newsContainerEl.classList.add("carousel-item");
-            }
-            var articleContainerEl = document.createElement("div");
-            var articleLabelEl = document.createElement("div");
-            var articleHeadlineEl = document.createElement("h3");
-            var articleAuthorEl = document.createElement("h4");
-            var articleImgEl = document.createElement("img");
-            var articleSummaryEl = document.createElement("p");
-            var articleLinkEl = document.createElement("a");
+            // create DOM Elements used to display news articles on page
+            var newsContainerEl = document.querySelector("#article-display");
+            var newsCardEl = document.createElement("div");
+            var newsImageContainerEl = document.createElement('div');
+            var newsImgEl = document.createElement("img");
+            var newsCardTitleEl = document.createElement("span");
+            var newsCardBtnEl = document.createElement("a");
+            var newsCardBtnIconEl = document.createElement("i");
+            var newsCardSummaryContainerEl = document.createElement("div");
+            var newsCardSummaryEl = document.createElement("p");
 
             // add content to DOM Elements
-            articleHeadlineEl.textContent = articles.response.results[i].fields.headline;
-            articleAuthorEl.textContent = articles.response.results[i].fields.byline;
-            articleImgEl.setAttribute("src", articles.response.results[i].fields.thumbnail);
-            articleSummaryEl.innerHTML = articles.response.results[i].fields.trailText;
-            articleLinkEl.setAttribute("href", articles.response.results[i].fields.shortUrl);
-            articleLinkEl.setAttribute("target", "_blank");
-            articleLinkEl.innerText = "CLICK TO READ";
+            newsImgEl.setAttribute("src", articles.response.results[i].fields.thumbnail);
+            newsCardTitleEl.textContent = articles.response.results[i].fields.headline;
+            newsCardBtnEl.setAttribute("href", articles.response.results[i].fields.shortUrl);
+            // articleAuthorEl.textContent = articles.response.results[i].fields.byline;
+            newsCardSummaryEl.innerHTML = articles.response.results[i].fields.trailText;
 
             // set attributes of DOM Elements
-            articleContainerEl.classList.add("news-card");
-            articleLabelEl.classList.add("article-label");
+            newsCardEl.classList.add("card", "small");
+            newsImageContainerEl.classList.add("card-image");
+            newsCardTitleEl.classList.add("card-title");
+            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
+            newsCardBtnIconEl.classList.add("material-icons");
+            newsCardSummaryContainerEl.classList.add("card-content");
 
             // combine DOM Elements and add  to container
-            articleLabelEl.appendChild(articleHeadlineEl);
-            articleLabelEl.appendChild(articleAuthorEl);
-            articleContainerEl.appendChild(articleLabelEl);
-            articleContainerEl.appendChild(articleImgEl);
-            articleContainerEl.appendChild(articleSummaryEl);
-            articleContainerEl.appendChild(articleLinkEl);
-            newsContainerEl.appendChild(articleContainerEl);
+            newsCardBtnEl.appendChild(newsCardBtnIconEl);
+            newsImageContainerEl.appendChild(newsImgEl);
+            newsImageContainerEl.appendChild(newsCardTitleEl);
+            newsImageContainerEl.appendChild(newsCardBtnEl);
+            newsCardSummaryContainerEl.appendChild(newsCardSummaryEl);
+            newsCardEl.appendChild(newsImageContainerEl);
+            newsCardEl.appendChild(newsCardSummaryContainerEl);
+            newsContainerEl.appendChild(newsCardEl);
         }
     })
 };
@@ -188,8 +184,7 @@ window.onload = function () {
         getNews(newsCategory)
     }
     else {
-        document.querySelector("#carousel-first-slide").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
-        document.querySelector("#carousel-second-slide").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
+        document.querySelector("#artice-display").innerHTML = "<h2>PLEASE SELECT A NEWS CATEGORY</h2>";
     };
 };
 
