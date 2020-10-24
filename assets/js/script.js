@@ -74,12 +74,35 @@ function getNews(newsCategory) {
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
     getForecast(cityName);
-    makeRow(cityName);
-    if (localStorage.getItem(favCities)) {
-        var favCities = JSON.parse(localStorage.getItem(favCities));
+    makeFavouriteElement(cityName);
+    storeFavouriteCities(cityName);
+    document.querySelector("#cityname").value = "";
+    document.querySelector("#cityname").setAttribute("placeholder", cityName);
+}
+
+//make rows of searched cities (clickable)
+function makeFavouriteElement(cityName) {
+    var liEl = document.createElement("li")
+    liEl.classList.add("list-group-item", "list-group-item-action");
+    var text = cityName;
+    liEl.textContent = text;
+    var historyEl = document.querySelector('.history');
+    historyEl.onclick = function (event) {
+        console.log(event.target.tagName)
+        if (event.target.tagName === "LI") {
+            getForecast(event.target.textContent)
+        }
+    }
+    historyEl.appendChild(liEl);
+};
+
+// Store favourite cities in local storage
+function storeFavouriteCities (cityName) {
+    if (localStorage.getItem("favCities")) {
+        var favCities = JSON.parse(localStorage.getItem("favCities"));
         console.log(favCities);
         if (favCities.length >= 5) {
-            favCities.pop();
+            favCities.shift();
             favCities.push(cityName);
             console.log(favCities);
             localStorage.setItem("favCities", JSON.stringify(favCities));
@@ -97,26 +120,9 @@ function getCityName() {
     }
 }
 
-//make rows of searched cities (clickable)
-function makeRow(cityName) {
-    var liEl = document.createElement("li")
-    liEl.classList.add("list-group-item", "list-group-item-action");
-    var text = cityName;
-    liEl.textContent = text;
-    var historyEl = document.querySelector('.history');
-    historyEl.onclick = function (event) {
-        console.log(event.target.tagName)
-        if (event.target.tagName === "LI") {
-            getForecast(event.target.textContent)
-        }
-    }
-    historyEl.appendChild(liEl);
-};
-
 
 
 //fetch weather forecast data for that city from open weather API
-
 function getForecast(cityName) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric")
         .then(function (response) {
@@ -168,6 +174,14 @@ function getForecast(cityName) {
                         }]
                     },
                     options: {
+                        layout: {
+                            padding: {
+                                left: 50,
+                                right: 0,
+                                top: 0,
+                                bottom: 0
+                            }
+                        },
                         scales: {
                             xAxes: [{
                                 gridLines: {
