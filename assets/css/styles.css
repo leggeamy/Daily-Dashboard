@@ -49,8 +49,8 @@
 
   .chart {
     position: relative;
-    height:60vh;
-    width:60vw;
+    /* height:60vh;
+    width:60vw; */
   }
 
   #chart-container > h5 {
@@ -154,4 +154,11 @@
     background: #985EFF;
     width: 100%;
     padding: 40px 35px;
+    }
+
+    @media screen and (max-width: 575px) {
+      section {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
     }
