@@ -71,10 +71,15 @@ function getNews(newsCategory) {
 // get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
-    getForecast(cityName);
-    storeFavouriteCities(cityName);
-    document.querySelector("#cityname").value = "";
-    document.querySelector("#cityname").setAttribute("placeholder", cityName);
+    if (cityName) {
+        getForecast(cityName);
+        storeFavouriteCities(cityName);
+        document.querySelector("#cityname").value = "";
+        document.querySelector("#cityname").setAttribute("placeholder", cityName);
+    }
+    else {
+        document.querySelector("#cityname").setAttribute("placeholder", "Please Enter A City!");
+    }
 }
 
 // make rows of searched cities
@@ -102,12 +107,30 @@ function storeFavouriteCities(cityName) {
                 document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
+            else {
+                favCities.splice(favCities.indexOf(cityName), 1);
+                console.log(favCities);
+                favCities.splice(4, 0, cityName);
+                console.log(favCities);
+                localStorage.setItem("favCities", JSON.stringify(favCities));
+                document.querySelector('.favourites').textContent = "";
+                favCities.forEach(makeFavouriteElement);
+            }
         }
         else {
             if (!favCities.includes(cityName)) {
                 favCities.push(cityName);
                 console.log(favCities);
                 localStorage.setItem("favCities", JSON.stringify(favCities));
+                favCities.forEach(makeFavouriteElement);
+            }
+            else {
+                favCities.splice(favCities.indexOf(cityName), 1);
+                console.log(favCities);
+                favCities.splice((favCities.length - 1), 0, cityName);
+                console.log(favCities);
+                localStorage.setItem("favCities", JSON.stringify(favCities));
+                document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
         }
@@ -126,7 +149,11 @@ function storeFavouriteCities(cityName) {
 function getForecast(cityName) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric")
         .then(function (response) {
-            return response.json();
+            if (response.status >= 200 && response.status <= 299) {
+                return response.json();
+              } else {
+                document.querySelector("#cityname").setAttribute("placeholder", "City not found!");
+              }
         }).then(function (data) {
 
             (function makeChart() {
@@ -209,6 +236,8 @@ document.querySelector("#search-button").addEventListener("click", function (e) 
 document.querySelector('.favourites').addEventListener("click", function (event) {
     console.log(event.target.tagName);
     getForecast(event.target.textContent);
+    document.querySelector("#cityname").setAttribute("placeholder", event.target.textContent);
+    storeFavouriteCities(event.target.textContent);
 });
 
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
@@ -232,14 +261,17 @@ window.onload = function () {
     };
     console.log(favCities);
     if(favCities) {
-        getForecast(favCities[4]);
+        getForecast(favCities[favCities.length - 1]);
+        document.querySelector("#cityname").setAttribute("placeholder", (favCities[favCities.length - 1]));
         document.querySelector(".favourites").textContent = "";
         favCities.forEach(makeFavouriteElement);
     }
     else {
-        document.querySelector('.favourites')
+        var weatherPromptContainerEl = document.querySelector("#myChart");
+        var weatherPromptEl = document.createElement("h4");
+        weatherPromptEl.textContent = "PLEASE SEARCH FOR WEATHER";
+        weatherPromptContainerEl.appendChild(weatherPromptEl);
     }
-
 };
 
 //collapsible drawer section//
