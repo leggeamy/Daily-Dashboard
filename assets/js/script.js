@@ -21,14 +21,12 @@ function getNews(newsCategory) {
     document.querySelector("#article-display").textContent = "";
     // store current day
     var fromDate = moment().format("YYYY-MM-DD");
-    console.log(fromDate);
     // get news for selected newsCategory fromDate
     fetch(
         `https://content.guardianapis.com/search?q=${newsCategory}&format=json&${fromDate}&show-fields=headline,byline,trailText,thumbnail,short-url&order-by-relevance&${newsApiKey}`
     ).then(function (response) {
         return response.json();
     }).then(function (articles) {
-        console.log(articles);
         for (i = 0; i < 4; i++) {
             // create DOM Elements used to display news articles on page
             var newsContainerEl = document.querySelector("#article-display");
@@ -101,7 +99,6 @@ function storeFavouriteCities(cityName) {
     // check if there are favCities stored in local storage
     if (localStorage.getItem("favCities")) {
         var favCities = JSON.parse(localStorage.getItem("favCities"));
-        console.log(favCities);
         // check if number of favCities is equal to or more than 5
         if (favCities.length >= 5) {
             // check that favCities does not contain the cityName currently being processed
@@ -110,7 +107,6 @@ function storeFavouriteCities(cityName) {
                 favCities.shift();
                 // add new city to favCities
                 favCities.push(cityName);
-                console.log(favCities);
                 // save favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 // clear favourites element and rebuild with new favCities
@@ -120,10 +116,8 @@ function storeFavouriteCities(cityName) {
             else {
                 // remove cityName currently being processed from favCities
                 favCities.splice(favCities.indexOf(cityName), 1);
-                console.log(favCities);
                 // readd cityName currently being processed as last item of favCities
                 favCities.splice(4, 0, cityName);
-                console.log(favCities);
                 // store favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 // clear favourites element and rebuild with new favCities
@@ -136,7 +130,6 @@ function storeFavouriteCities(cityName) {
             if (!favCities.includes(cityName)) {
                 // add current cityName to favCitites
                 favCities.push(cityName);
-                console.log(favCities);
                 // store favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 favCities.forEach(makeFavouriteElement);
@@ -144,10 +137,8 @@ function storeFavouriteCities(cityName) {
             else {
                 // remove cityName currently being processed from favCities
                 favCities.splice(favCities.indexOf(cityName), 1);
-                console.log(favCities);
                 // add cityName currently being processed as last item in favCtites
                 favCities.splice((favCities.length - 1), 0, cityName);
-                console.log(favCities);
                 // add favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 // rebuild favourites element with new favCities
@@ -201,9 +192,6 @@ function getForecast(cityName) {
                         temps.push(temp)
                     }
                 }
-            console.log(dates)
-            console.log(temps)
-
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -279,7 +267,6 @@ document.querySelector("#search-button").addEventListener("click", function (e) 
 
 // listen for clicks on items in favourites and call function to get forecast
 document.querySelector('.favourites').addEventListener("click", function (event) {
-    console.log(event.target.tagName);
     getForecast(event.target.textContent);
 });
 
@@ -294,7 +281,6 @@ document.querySelector("#myBtnContainer").addEventListener("click", function (e)
 window.onload = function () {
     newsCategory = localStorage.getItem("recentNewsCategory");
     favCities = JSON.parse(localStorage.getItem("favCities"));
-    console.log(newsCategory);
     if (newsCategory) {
         getNews(newsCategory)
     }
@@ -304,7 +290,6 @@ window.onload = function () {
         newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
         newsPromptContainerEl.appendChild(newsPromptEl);
     };
-    console.log(favCities);
     if(favCities) {
         getForecast(favCities[favCities.length - 1]);
         document.querySelector("#cityname").setAttribute("placeholder", (favCities[favCities.length - 1]));
