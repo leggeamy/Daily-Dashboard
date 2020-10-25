@@ -49,12 +49,13 @@ function getNews(newsCategory) {
             newsCardSummaryEl.innerHTML = articles.response.results[i].fields.trailText;
 
             // set attributes of DOM Elements
-            newsCardEl.classList.add("card", "small");
+            newsCardEl.classList.add("card", "small", "column");
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
             newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
+            newsCardBtnIconEl.textContent="add"
             newsCardSummaryContainerEl.classList.add("card-content");
 
             // combine DOM Elements and add  to container
