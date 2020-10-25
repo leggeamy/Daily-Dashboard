@@ -11,6 +11,7 @@
 6. materialize.css
 7. Guardian News API
 8. OpenWeather API
+9. charts.js
 
 **Key Features:**
 1. User is prompted to provide their name and current city on their first visit to the WebApp. (in development)
