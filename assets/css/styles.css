@@ -170,6 +170,6 @@
   /* bottom: 5px; !important;
 } */
 
-.btn-floating.halfway-fab {
+.btn-floating, .halfway-fab {
   bottom: 5px !important;
 }

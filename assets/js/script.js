@@ -1,5 +1,8 @@
-// Store API Key in a variable
+// Store News API Key in a variable
 var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
+
+// Store Weather API Key in variable
+var weatherApiKey = "&appid=ed3ceecb82da99a626e9f6aef02e2dbb";
 
 // Find user selected news category
 function getNewsCategory() {
@@ -71,10 +74,13 @@ function getNews(newsCategory) {
 // get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
+    // validate whether cityname input firld is empty or not
     if (cityName) {
+        // call funtion to get forecast
         getForecast(cityName);       
     }
     else {
+        // Place message in city input declaring that field cannot be empty
         document.querySelector("#cityname").setAttribute("placeholder", "Please Enter A City!");
     }
 }
@@ -92,48 +98,68 @@ function makeFavouriteElement(cityName) {
 
 // Store favourite cities in local storage
 function storeFavouriteCities(cityName) {
+    // check if there are favCities stored in local storage
     if (localStorage.getItem("favCities")) {
         var favCities = JSON.parse(localStorage.getItem("favCities"));
         console.log(favCities);
+        // check if number of favCities is equal to or more than 5
         if (favCities.length >= 5) {
+            // check that favCities does not contain the cityName currently being processed
             if (!favCities.includes(cityName)) {
+                // remove element at index 0 of favCities leaving remaining cities
                 favCities.shift();
+                // add new city to favCities
                 favCities.push(cityName);
                 console.log(favCities);
+                // save favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
+                // clear favourites element and rebuild with new favCities
                 document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
             else {
+                // remove cityName currently being processed from favCities
                 favCities.splice(favCities.indexOf(cityName), 1);
                 console.log(favCities);
+                // readd cityName currently being processed as last item of favCities
                 favCities.splice(4, 0, cityName);
                 console.log(favCities);
+                // store favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
+                // clear favourites element and rebuild with new favCities
                 document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
         }
         else {
+            // check that favCities does not contain cityname currently being processed
             if (!favCities.includes(cityName)) {
+                // add current cityName to favCitites
                 favCities.push(cityName);
                 console.log(favCities);
+                // store favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 favCities.forEach(makeFavouriteElement);
             }
             else {
+                // remove cityName currently being processed from favCities
                 favCities.splice(favCities.indexOf(cityName), 1);
                 console.log(favCities);
+                // add cityName currently being processed as last item in favCtites
                 favCities.splice((favCities.length - 1), 0, cityName);
                 console.log(favCities);
+                // add favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
+                // rebuild favourites element with new favCities
                 document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
         }
     }
     else {
+        // create new array to store favCities
         var favCities = [];
+        // add current cityName and store in local storage
         favCities.push(cityName);
         localStorage.setItem("favCities", JSON.stringify(favCities));
         favCities.forEach(makeFavouriteElement);
@@ -144,15 +170,20 @@ function storeFavouriteCities(cityName) {
 
 //fetch weather forecast data for that city from open weather API
 function getForecast(cityName) {
-    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric"
+    fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}${weatherApiKey}&units=metric`
     ).then(function (response) {
+        // check that api response contains valid weather data
             if (response.status >= 200 && response.status <= 299) {
+                // pass valid response to next member in chain
                 return response.json();
             } else {                
                 return null;
             }
     }).then(function (data) {
+        // check that passed data is not null
         if (!(data == null)) {
+            // create chart and display it on the page
             (function makeChart() {
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var temps = [];
@@ -221,39 +252,45 @@ function getForecast(cityName) {
                 }
             });
             })()
+            // call function to store favCities and pass current cityName
             storeFavouriteCities(cityName);
+            // replace placeholder text of weather search with current cityName
             document.querySelector("#cityname").value = "";
             document.querySelector("#cityname").setAttribute("placeholder", cityName);
         }
         else {
+            // clear the chart showing previous data
             var chartEl = document.querySelector("#myChart")
             var clearChartEl = document.createElement("canvas");
             clearChartEl.setAttribute("id", "myChart");
             chartEl.replaceWith(clearChartEl);
+            // update search form placeholder with message "City not found!"
             document.querySelector("#cityname").value = "";
             document.querySelector("#cityname").setAttribute("placeholder", "City not found!");
         }
     })
 }
 
+// listen for clicks on weather search button and call function to get cityName inout by user
 document.querySelector("#search-button").addEventListener("click", function (e) {
     e.preventDefault();
     getCityName();
 });
 
+// listen for clicks on items in favourites and call function to get forecast
 document.querySelector('.favourites').addEventListener("click", function (event) {
     console.log(event.target.tagName);
     getForecast(event.target.textContent);
-    document.querySelector("#cityname").setAttribute("placeholder", event.target.textContent);
-    storeFavouriteCities(event.target.textContent);
 });
 
+// listen for clicks on news category button and call function to fetch appropriate news
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
     e.preventDefault();
     e.target.classList.add("selected-news");
     getNewsCategory();
 });
 
+// when the page loads check is favCities and recentNew stored in local Storage and use to repopulate the page
 window.onload = function () {
     newsCategory = localStorage.getItem("recentNewsCategory");
     favCities = JSON.parse(localStorage.getItem("favCities"));
