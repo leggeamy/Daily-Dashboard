@@ -72,10 +72,7 @@ function getNews(newsCategory) {
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
     if (cityName) {
-        getForecast(cityName);
-        storeFavouriteCities(cityName);
-        document.querySelector("#cityname").value = "";
-        document.querySelector("#cityname").setAttribute("placeholder", cityName);
+        getForecast(cityName);       
     }
     else {
         document.querySelector("#cityname").setAttribute("placeholder", "Please Enter A City!");
@@ -147,15 +144,15 @@ function storeFavouriteCities(cityName) {
 
 //fetch weather forecast data for that city from open weather API
 function getForecast(cityName) {
-    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric")
-        .then(function (response) {
+    fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric"
+    ).then(function (response) {
             if (response.status >= 200 && response.status <= 299) {
                 return response.json();
-              } else {
-                document.querySelector("#cityname").setAttribute("placeholder", "City not found!");
-              }
-        }).then(function (data) {
-
+            } else {                
+                return null;
+            }
+    }).then(function (data) {
+        if (!(data == null)) {
             (function makeChart() {
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var temps = [];
@@ -223,10 +220,21 @@ function getForecast(cityName) {
                     }
                 }
             });
-        })()
-
+            })()
+            storeFavouriteCities(cityName);
+            document.querySelector("#cityname").value = "";
+            document.querySelector("#cityname").setAttribute("placeholder", cityName);
+        }
+        else {
+            var chartEl = document.querySelector("#myChart")
+            var clearChartEl = document.createElement("canvas");
+            clearChartEl.setAttribute("id", "myChart");
+            chartEl.replaceWith(clearChartEl);
+            document.querySelector("#cityname").value = "";
+            document.querySelector("#cityname").setAttribute("placeholder", "City not found!");
+        }
     })
-};
+}
 
 document.querySelector("#search-button").addEventListener("click", function (e) {
     e.preventDefault();
