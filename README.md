@@ -13,4 +13,4 @@
 
 Application URL: https://leggeamy.github.io/Daily-Dashboard/
 
-Application image:
+Application image: ![Daily-Dashbaord Screenshot](assets/images/daily_dashboard_ss.png "Daily-Dashboard Screenshot")
