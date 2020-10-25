@@ -1,10 +1,6 @@
 # Daily-Dashboard
 
-<<<<<<< HEAD
-## This WebApp allows a user to see the some Weather and a few News Headlines in a simple single page design. It can provide some information that can prove useful in planning a work day or a trip
-=======
 ## This WebApp allows a user to see the some Weather information and a few News Headlines in a simple single page design. It can provide some information that can prove useful in planning a work day or a trip
->>>>>>> feature/get-news
 
 **Key Features:**
 1. User is prompted to provide their name and current city on their first visit to the WebApp.
@@ -15,6 +11,6 @@
 6. When a user select a News Category, the selected News Category is saved to localstorage. The news is then automatically fetched and presented using this News Category on reloads of the WebApp or revists to the page. If there is no data for recent News Category in localstorage, the carousel displays a message asking the user to select a News Category.
 7. There is a button that allows the user to clear saved data, effectively resetting the WebApp
 
-Application URL:
+Application URL: https://leggeamy.github.io/Daily-Dashboard/
 
 Application image:
