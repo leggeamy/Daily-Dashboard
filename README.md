@@ -2,6 +2,16 @@
 
 ## This WebApp allows a user to see the some Weather information and a few News Headlines in a simple single page design. It can provide some information that can prove useful in planning a work day or a trip
 
+**Included technologies / resources:**
+1. HTML
+2. CSS
+3. Javascript
+4. JQuery
+5. moment.js
+6. materialize.css
+7. Guardian News API
+8. OpenWeather API
+
 **Key Features:**
 1. User is prompted to provide their name and current city on their first visit to the WebApp. (in development)
 2. This information is used to provide a warm greeting on the banner at the top of the page and to get weather for the user provided city. (in development)
