@@ -1,9 +1,6 @@
 // Store API Key in a variable
 var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
 
-// // Container to store Favourite cities in local storage
-// var favCities = [];
-
 // Find user selected news category
 function getNewsCategory() {
     // get news button with class selected-news
@@ -55,7 +52,7 @@ function getNews(newsCategory) {
             newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
-            newsCardBtnIconEl.textContent="add"
+            newsCardBtnIconEl.textContent = "add"
             newsCardSummaryContainerEl.classList.add("card-content");
 
             // combine DOM Elements and add  to container
@@ -71,53 +68,55 @@ function getNews(newsCategory) {
     })
 };
 
-//get info from user search for city
+// get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
     getForecast(cityName);
-    makeFavouriteElement(cityName);
     storeFavouriteCities(cityName);
     document.querySelector("#cityname").value = "";
     document.querySelector("#cityname").setAttribute("placeholder", cityName);
 }
 
-//make rows of searched cities (clickable)
+// make rows of searched cities
 function makeFavouriteElement(cityName) {
+    var historyEl = document.querySelector('.favourites');
     var liEl = document.createElement("li")
     liEl.classList.add("list-group-item", "list-group-item-action");
     var text = cityName;
     liEl.textContent = text;
-    var historyEl = document.querySelector('.history');
-    historyEl.onclick = function (event) {
-        console.log(event.target.tagName)
-        if (event.target.tagName === "LI") {
-            getForecast(event.target.textContent)
-        }
-    }
     historyEl.appendChild(liEl);
+
 };
 
 // Store favourite cities in local storage
-function storeFavouriteCities (cityName) {
+function storeFavouriteCities(cityName) {
     if (localStorage.getItem("favCities")) {
         var favCities = JSON.parse(localStorage.getItem("favCities"));
         console.log(favCities);
         if (favCities.length >= 5) {
-            favCities.shift();
-            favCities.push(cityName);
-            console.log(favCities);
-            localStorage.setItem("favCities", JSON.stringify(favCities));
+            if (!favCities.includes(cityName)) {
+                favCities.shift();
+                favCities.push(cityName);
+                console.log(favCities);
+                localStorage.setItem("favCities", JSON.stringify(favCities));
+                document.querySelector('.favourites').textContent = "";
+                favCities.forEach(makeFavouriteElement);
+            }
         }
         else {
-            favCities.push(cityName);
-            console.log(favCities);
-            localStorage.setItem("favCities", JSON.stringify(favCities));
+            if (!favCities.includes(cityName)) {
+                favCities.push(cityName);
+                console.log(favCities);
+                localStorage.setItem("favCities", JSON.stringify(favCities));
+                favCities.forEach(makeFavouriteElement);
+            }
         }
     }
     else {
         var favCities = [];
         favCities.push(cityName);
         localStorage.setItem("favCities", JSON.stringify(favCities));
+        favCities.forEach(makeFavouriteElement);
     }
 }
 
@@ -128,8 +127,7 @@ function getForecast(cityName) {
     fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=ed3ceecb82da99a626e9f6aef02e2dbb&units=metric")
         .then(function (response) {
             return response.json();
-        })
-        .then(function (data) {
+        }).then(function (data) {
 
             (function makeChart() {
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -148,66 +146,69 @@ function getForecast(cityName) {
                         temps.push(temp)
                     }
                 }
+            console.log(dates)
+            console.log(temps)
 
-                console.log(dates)
-                console.log(temps)
-
-
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: dates,
-                        datasets: [{
-                            label: 'Daily Forecast Temperatures',
-                            lineTension: 0,
-                            data: temps,
-                            backgroundColor: [
-                                'rgba(82, 144, 201, 0.5)',
-                            ],
-                            borderColor: [
-                                'rgba(82, 144, 201, 1)',
-                                'rgba(82, 144, 201, 1)',
-                                'rgba(82, 144, 201, 1)',
-                                'rgba(82, 144, 201, 1)',
-                                'rgba(82, 144, 201, 1)',
-                            ],
-                            borderWidth: 3
-                        }]
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Daily Forecast Temperatures',
+                        lineTension: 0,
+                        data: temps,
+                        backgroundColor: [
+                            'rgba(82, 144, 201, 0.5)',
+                        ],
+                        borderColor: [
+                            'rgba(82, 144, 201, 1)',
+                            'rgba(82, 144, 201, 1)',
+                            'rgba(82, 144, 201, 1)',
+                            'rgba(82, 144, 201, 1)',
+                            'rgba(82, 144, 201, 1)',
+                        ],
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    layout: {
+                        padding: {
+                            left: 50,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
                     },
-                    options: {
-                        layout: {
-                            padding: {
-                                left: 50,
-                                right: 0,
-                                top: 0,
-                                bottom: 0
-                            }
-                        },
-                        scales: {
-                            xAxes: [{
+                    scales: {
+                        xAxes: [{
+                            gridLines: {
+                                display: false
+                            },
+                            yAxes: [{
                                 gridLines: {
                                     display: false
                                 },
-                                yAxes: [{
-                                    gridLines: {
-                                        display: false
-                                    },
-                                    ticks: {
-                                        beginAtZero: true,
-                                    }
-                                }]
+                                ticks: {
+                                    beginAtZero: true,
+                                }
                             }]
-                        }
+                        }]
                     }
-                });
-            })()
+                }
+            });
+        })()
 
-        })
+    })
 };
 
 document.querySelector("#search-button").addEventListener("click", function (e) {
     e.preventDefault();
     getCityName();
+});
+
+document.querySelector('.favourites').addEventListener("click", function (event) {
+    console.log(event.target.tagName);
+    getForecast(event.target.textContent);
 });
 
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
@@ -218,8 +219,9 @@ document.querySelector("#myBtnContainer").addEventListener("click", function (e)
 
 window.onload = function () {
     newsCategory = localStorage.getItem("recentNewsCategory");
+    favCities = JSON.parse(localStorage.getItem("favCities"));
     console.log(newsCategory);
-    if(newsCategory) {
+    if (newsCategory) {
         getNews(newsCategory)
     }
     else {
@@ -228,9 +230,19 @@ window.onload = function () {
         newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
         newsPromptContainerEl.appendChild(newsPromptEl);
     };
+    console.log(favCities);
+    if(favCities) {
+        getForecast(favCities[4]);
+        document.querySelector(".favourites").textContent = "";
+        favCities.forEach(makeFavouriteElement);
+    }
+    else {
+        document.querySelector('.favourites')
+    }
+
 };
 
 //collapsible drawer section//
-$(document).ready(function(){
+$(document).ready(function () {
     $('.collapsible').collapsible();
-  });
+});

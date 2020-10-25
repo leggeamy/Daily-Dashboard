@@ -49,8 +49,8 @@
 
   .chart {
     position: relative;
-    /* height:60vh;
-    width:60vw; */
+    height:60vh;
+    width:60vw;
   }
 
   #chart-container > h5 {
@@ -94,13 +94,8 @@
 
   #weather-search {
     margin: 3.5%;
-<<<<<<< HEAD
     color: rgb(96, 8, 131);
     /* font-size: 10px; */
-=======
-    color: rgb(0, 0, 0);
-    font-size: 18px;
->>>>>>> develop
     line-height: 1.3;
   }
 
@@ -161,14 +156,6 @@
     padding: 40px 35px;
     }
 
-<<<<<<< HEAD
-    @media screen and (max-width: 575px) {
-      section {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-    }
-=======
   .column {
     float: left;
     width: 25%;
@@ -186,4 +173,3 @@
 .btn-floating.halfway-fab {
   bottom: 5px !important;
 }
->>>>>>> develop
