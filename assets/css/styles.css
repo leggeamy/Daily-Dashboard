@@ -68,6 +68,7 @@
 
   #chart-container > h5 {
     padding-left: 52px;
+    position: relative;
   }
 
   #mychart {
