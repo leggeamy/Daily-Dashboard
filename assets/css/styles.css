@@ -59,13 +59,23 @@
   }
 
   .chart {
-    position: relative;
-    height:60vh;
-    width:60vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    padding: 0 10px;
   }
 
   #chart-container > h5 {
     padding-left: 52px;
+  }
+
+  #mychart {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    padding: 0 10px;
   }
 
   #modal_wrapper.overlay::before {
@@ -161,6 +171,7 @@
 
     .control-label {
       font-size: 40px;
+      color: rgba(12, 105, 128, 1);
     }
 
     .prompt-center {
