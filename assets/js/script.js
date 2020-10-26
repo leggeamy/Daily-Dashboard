@@ -2,7 +2,7 @@
 var newsApiKey = "&api-key=2d7a1e64-833c-4dd6-b4cc-5d27dee745b0";
 
 // Store Weather API Key in variable
-var weatherApiKey = "&appid=ed3ceecb82da99a626e9f6aef02e2dbb";
+var weatherApiKey = "&key=27b520f8184c4e47995699bb7910eddd";
 
 // Find user selected news category
 function getNewsCategory() {
@@ -50,7 +50,7 @@ function getNews(newsCategory) {
             newsCardEl.classList.add("card", "small", "column");
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
-            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
+            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect");
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
             newsCardBtnIconEl.textContent = "add"
@@ -160,15 +160,20 @@ function storeFavouriteCities(cityName) {
 
             //fetch hourly weather forecast data for that city from open weather API
 function getForecast(cityName) {
+<<<<<<< HEAD
     fetch(
         ("https://api.weatherbit.io/v2.0/forecast/hourly?city=" + cityName + "&key=27b520f8184c4e47995699bb7910eddd&hours=5")
+=======
+    fetch(        
+        `https://api.weatherbit.io/v2.0/forecast/hourly?city=${cityName}${weatherApiKey}&hours=5`
+>>>>>>> feature/CSS-updates
     ).then(function (response) {
         // check that api response contains valid weather data
-            if (response.status >= 200 && response.status <= 299) {
+            if (response.status == 204) {
                 // pass valid response to next member in chain
-                return response.json();
+                return null;                
             } else {                
-                return null;
+                return response.json();
             }
     }).then(function (data) {
         // check that passed data is not null
@@ -197,23 +202,26 @@ function getForecast(cityName) {
                 data: {
                     labels: times,
                     datasets: [{
-                        label: 'Hourly Forecast Temperatures',
+                        label: 'Hourly Forecast Temperatures in Degrees Celsius',
                         lineTension: 0,
                         data: temps,
                         backgroundColor: [
-                            'rgba(82, 144, 201, 0.5)',
+                            'rgba(12, 105, 128, 1)',
                         ],
                         borderColor: [
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
                         ],
                         borderWidth: 3
                     }]
                 },
                 options: {
+                    legend: {
+                        display: false
+                      },
                     layout: {
                         padding: {
                             left: 50,
