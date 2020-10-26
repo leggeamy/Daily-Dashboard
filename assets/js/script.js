@@ -50,7 +50,7 @@ function getNews(newsCategory) {
             newsCardEl.classList.add("card", "small", "column");
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
-            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
+            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light");
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
             newsCardBtnIconEl.textContent = "add"
@@ -202,14 +202,14 @@ function getForecast(cityName) {
                         lineTension: 0,
                         data: temps,
                         backgroundColor: [
-                            'rgba(82, 144, 201, 0.5)',
+                            'rgba(12, 105, 128, 1)',
                         ],
                         borderColor: [
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
-                            'rgba(82, 144, 201, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
+                            'rgba(12, 105, 128, 1)',
                         ],
                         borderWidth: 3
                     }]
