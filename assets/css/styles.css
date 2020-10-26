@@ -161,6 +161,10 @@
     color: rgba(0, 0, 0, 1);
     }
 
+   ::placeholder {
+      color: rgba(3,38,91,0.4);
+    }
+
     .control-label {
       font-size: 40px;
       color: rgba(3,38,91,1);
