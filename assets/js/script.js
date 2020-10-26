@@ -50,7 +50,7 @@ function getNews(newsCategory) {
             newsCardEl.classList.add("card", "small", "column");
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
-            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light");
+            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect");
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
             newsCardBtnIconEl.textContent = "add"
@@ -214,6 +214,9 @@ function getForecast(cityName) {
                     }]
                 },
                 options: {
+                    legend: {
+                        display: false
+                      },
                     layout: {
                         padding: {
                             left: 50,
