@@ -160,13 +160,8 @@ function storeFavouriteCities(cityName) {
 
             //fetch hourly weather forecast data for that city from open weather API
 function getForecast(cityName) {
-<<<<<<< HEAD
-    fetch(
-        ("https://api.weatherbit.io/v2.0/forecast/hourly?city=" + cityName + "&key=27b520f8184c4e47995699bb7910eddd&hours=5")
-=======
     fetch(        
         `https://api.weatherbit.io/v2.0/forecast/hourly?city=${cityName}${weatherApiKey}&hours=5`
->>>>>>> feature/CSS-updates
     ).then(function (response) {
         // check that api response contains valid weather data
             if (response.status == 204) {
