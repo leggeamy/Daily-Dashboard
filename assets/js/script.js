@@ -72,7 +72,7 @@ function getNews(newsCategory) {
 // get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
-    // validate whether cityname input firld is empty or not
+    // validate whether cityname input field is empty or not
     if (cityName) {
         // call funtion to get forecast
         getForecast(cityName);       
@@ -158,11 +158,11 @@ function storeFavouriteCities(cityName) {
 }
 
 
-
-//fetch weather forecast data for that city from open weather API
+            //fetch hourly weather forecast data for that city from open weather API
 function getForecast(cityName) {
     fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}${weatherApiKey}&units=metric`
+        // 
+        ("https://api.weatherbit.io/v2.0/forecast/hourly?city=" + cityName + "&key=27b520f8184c4e47995699bb7910eddd&hours=5")
     ).then(function (response) {
         // check that api response contains valid weather data
             if (response.status >= 200 && response.status <= 299) {
@@ -174,30 +174,31 @@ function getForecast(cityName) {
     }).then(function (data) {
         // check that passed data is not null
         if (!(data == null)) {
+
             // create chart and display it on the page
             (function makeChart() {
                 var ctx = document.getElementById('myChart').getContext('2d');
                 var temps = [];
-                var dates = [];
+                var times = [];
 
-                for (var i = 0; i < data.list.length; i++) {
-                    //only look at forecasts around 3pm
-                    if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-                        // take the date, make it into an array and only extract the day
-                        var date = data.list[i].dt_txt.split(" ")[0]
-                        var temp = data.list[i].main.temp_max
+                
+
+                for (var i = 0; i < data.data.length; i++) {
+                        // take the date, make it into an array and only extract the hour
+                        var time = data.data[i].timestamp_local.split("T")
+                        var temp = data.data[i].temp
 
                         //push the values to the arrays
-                        dates.push(date)
+                        times.push(time)
                         temps.push(temp)
                     }
-                }
+
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: dates,
+                    labels: times,
                     datasets: [{
-                        label: 'Daily Forecast Temperatures',
+                        label: 'Hourly Forecast Temperatures',
                         lineTension: 0,
                         data: temps,
                         backgroundColor: [
@@ -232,7 +233,7 @@ function getForecast(cityName) {
                                     display: false
                                 },
                                 ticks: {
-                                    beginAtZero: true,
+                                    beginAtZero: false,
                                 }
                             }]
                         }]
@@ -240,6 +241,8 @@ function getForecast(cityName) {
                 }
             });
             })()
+
+
             // call function to store favCities and pass current cityName
             storeFavouriteCities(cityName);
             // replace placeholder text of weather search with current cityName
