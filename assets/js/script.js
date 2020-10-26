@@ -198,7 +198,7 @@ function getForecast(cityName) {
                 data: {
                     labels: times,
                     datasets: [{
-                        label: 'Hourly Forecast Temperatures',
+                        label: 'Hourly Forecast Temperatures in Degrees Celsius',
                         lineTension: 0,
                         data: temps,
                         backgroundColor: [
