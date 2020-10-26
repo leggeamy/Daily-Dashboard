@@ -140,12 +140,15 @@
   }
 
   .collapsible {
-    background-color: rgba(2,119,189, 0.75);
+    background-color: rgba(3,38,91,0.75);
     border-radius: 25px;
+    color: white;
   }
 
   .collapsible-header {
     border-radius: 25px;
+    background-color: rgba(3,38,91,1);
+    color: white;
   }
 
   #cityname {
