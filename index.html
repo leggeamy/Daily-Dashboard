@@ -18,6 +18,16 @@
 </head>
 
 <body>
+    <nav>
+        <div class="nav-wrapper">
+            <p>Daily Dashboard</p>
+            <div id="username"></div>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <button id="modal_open" class="btn">User Info</button>
+                </ul>
+        </div>
+    </nav>
+
     <header>
         <div id="modal_wrapper">
             <div id="modal_window">
@@ -25,22 +35,13 @@
                 <p>Complete the form below:</p>
                 <form id="modal_form" method="POST" action="#" accept-charset="UTF-8">
                     <p><label>Your Name<strong>*</strong><br>
-                            <input type="text" autofocus required size="48" name="name" value=""></label></p>
+                        <input type="text" placeholder="Enter Name" id="user-name" />
                     <p><label>Your City<strong>*</strong><br>
-                            <input type="text" required title="Please enter your city" size="48" name="city"
-                                value=""></label></p>
-                    <p><input type="submit" name="modal_form" value="Submit"></p>
+                        <input type="text" placeholder="Enter City Name" id="city-name" />
+                    <button type="submit" name="modal-button" value="Submit" id="form-submit">Submit</button>
                 </form>
             </div> <!-- #modal_window -->
         </div> <!-- #modal_wrapper -->
-        <nav>
-            <div class="nav-wrapper">
-                <p>Daily Dashboard</p>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <button id="modal_open" class="btn">User Info</button>
-                </ul>
-            </div>
-        </nav>
 
     </header>
     <!-- Page Layout here -->
@@ -111,6 +112,7 @@
         integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
         crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/form.js"></script>
     ​
     </div>
 </body>

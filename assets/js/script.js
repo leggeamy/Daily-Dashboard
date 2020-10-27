@@ -157,8 +157,6 @@ function storeFavouriteCities(cityName) {
     }
 }
 
-
-
 //fetch weather forecast data for that city from open weather API
 function getForecast(cityName) {
     fetch(
@@ -308,3 +306,55 @@ window.onload = function () {
 $(document).ready(function () {
     $('.collapsible').collapsible();
 });
+
+// get city name
+function getCityName() {
+    var cityName = document.querySelector("#cityname").value;
+    // validate whether cityname input field is empty or not
+    if (cityName) {
+        // call funtion to get forecast
+        getForecast(cityName);       
+    }
+    else {
+        // Place message in city input declaring that field cannot be empty
+        document.querySelector("#cityname").setAttribute("placeholder", "Please Enter A City!");
+    }
+}
+
+// modal form section
+var form = document.querySelector("#modal_form").value;
+var userNameInput = document.querySelector("#user-name").value;
+var cityNameInput = document.querySelector("#city-name").value;
+var formSubmitClick = document.querySelector ("#form-submit");
+
+formSubmitClick.addEventListener ("click", createUserName(userNameInput));
+
+document.querySelector("#form-submit").addEventListener("click", function (e) {
+    e.preventDefault();
+    createUserName();
+});
+
+// capture user name and create element
+function createUserName () {
+    var userName = document.querySelector("#user-name").value;
+    var firstCityName = document.querySelector("#city-name").value; 
+    var navHeader = document.querySelector("#username")
+    // create a new div to hold username info
+    let div = document.createElement('div');
+    // create a div id
+    div.id = 'welcome-username';
+    // add the header
+    let h2 = document.createElement('h2');
+    h2.textContent = "Welcome " + userName + "!";
+    div.appendChild(h2);
+    // add the div to the document
+    navHeader.appendChild(div)
+}
+
+function checkForm() {
+    var userName = document.querySelector("#user-name").value;
+    var cityName = document.querySelector("#city-name").value;
+    // 
+    if (userName)
+
+}
