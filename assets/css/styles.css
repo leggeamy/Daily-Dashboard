@@ -28,6 +28,25 @@
     padding-right: 60px;
   }
 
+  #article-display {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #chartDiv {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h4 {
+    color: rgba(3,38,91,1);
+    background-color: rgba(77,208,225,0.5);
+    border-radius: 25px;
+    padding: 10px 10px;
+  }
+
   .btn {
     width: 100%;
     margin-bottom: 10px;

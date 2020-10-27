@@ -174,6 +174,11 @@ function getForecast(cityName) {
         // check that passed data is not null
         if (!(data == null)) {
 
+            var chartEl = document.querySelector("#myChart")
+            var clearChartEl = document.createElement("canvas");
+            clearChartEl.setAttribute("id", "myChart");
+            chartEl.appendChild(clearChartEl); 
+
             // create chart and display it on the page
             (function makeChart() {
                 var ctx = document.getElementById('myChart').getContext('2d');
@@ -276,14 +281,24 @@ function clearUserData () {
     document.querySelector("#article-display").textContent = "";
     var newsPromptContainerEl = document.querySelector("#article-display");
     var newsPromptEl = document.createElement("h4");
-    newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
+
+    newsPromptEl.textContent = "Please Select a News Category";
     newsPromptContainerEl.appendChild(newsPromptEl);
+
      // clear the chart showing previous data
      var chartEl = document.querySelector("#myChart")
      var clearChartEl = document.createElement("canvas");
      clearChartEl.setAttribute("id", "myChart");
      chartEl.replaceWith(clearChartEl);
-     // clear favourites
+
+    //   // prompt search for a city if none are selected
+    document.querySelector("#chartDiv").textContent = "";
+    var weatherPromptContainerEl = document.querySelector("#chartDiv");
+    var weatherPromptEl = document.createElement("h4");
+    weatherPromptEl.textContent = "Please Search for a City";
+    weatherPromptContainerEl.appendChild(weatherPromptEl);
+     
+    // clear favourites
      var favEl = document.querySelector(".favourites");
      var newFavEl = document.createElement("ul");
      newFavEl.classList.add("list-group", "favourites");
