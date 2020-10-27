@@ -50,11 +50,7 @@ function getNews(newsCategory) {
             newsCardEl.classList.add("card", "small", "column");
             newsImageContainerEl.classList.add("card-image");
             newsCardTitleEl.classList.add("card-title");
-<<<<<<< HEAD
-            newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect", "waves-light", "red");
-=======
             newsCardBtnEl.classList.add("btn-floating", "halfway-fab", "waves-effect");
->>>>>>> develop
             newsCardBtnEl.setAttribute("target", "_blank");
             newsCardBtnIconEl.classList.add("material-icons");
             newsCardBtnIconEl.textContent = "add"
