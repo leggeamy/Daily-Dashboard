@@ -72,6 +72,7 @@ function getNews(newsCategory) {
 // get info from user search for city
 function getCityName() {
     var cityName = document.querySelector("#cityname").value;
+    var cityName = cityName.toUpperCase();
     // validate whether cityname input field is empty or not
     if (cityName) {
         // call funtion to get forecast
