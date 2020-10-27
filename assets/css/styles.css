@@ -21,8 +21,7 @@
     display: inline-block;
     padding-left: 10px;
     font-size: 30px;
-  }
-
+  } 
 
   section {
     padding-left: 60px;
@@ -36,11 +35,22 @@
     border-radius: 25px;
   }
 
+  .nav-btn {
+    width: 160px;
+    margin-bottom: 10px;
+    background-color: rgba(12, 105, 128, 1);
+    border-radius: 25px;
+  }
+
   .btn:hover {
     background-color: rgba(3,38,91,0.65);
   }
- 
+
   .btn:focus {
+    background-color: rgba(12, 105, 128, 1);
+  }
+ 
+  #myBtnContainer > .btn:focus {
     background-color: rgba(3,38,91,1);
   }
 

@@ -160,7 +160,7 @@ function storeFavouriteCities(cityName) {
 
             //fetch hourly weather forecast data for that city from open weather API
 function getForecast(cityName) {
-    fetch(        
+    fetch(
         `https://api.weatherbit.io/v2.0/forecast/hourly?city=${cityName}${weatherApiKey}&hours=5`
     ).then(function (response) {
         // check that api response contains valid weather data
@@ -264,6 +264,39 @@ function getForecast(cityName) {
     })
 }
 
+// clear user data from local storage and from page
+function clearUserData () {
+    // remove items from local storage
+    localStorage.clear(favCities, newsCategory);
+    // clear cityname input field
+    document.querySelector("#cityname").value = "";
+    // set cityname input field to default
+    document.querySelector("#cityname").setAttribute("placeholder", "Please Enter A City!");
+    // clear previous news articles
+    document.querySelector("#article-display").textContent = "";
+    var newsPromptContainerEl = document.querySelector("#article-display");
+    var newsPromptEl = document.createElement("h4");
+    newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
+    newsPromptContainerEl.appendChild(newsPromptEl);
+     // clear the chart showing previous data
+     var chartEl = document.querySelector("#myChart")
+     var clearChartEl = document.createElement("canvas");
+     clearChartEl.setAttribute("id", "myChart");
+     chartEl.replaceWith(clearChartEl);
+     // clear favourites
+     var favEl = document.querySelector(".favourites");
+     var newFavEl = document.createElement("ul");
+     newFavEl.classList.add("list-group", "favourites");
+     favEl.replaceWith(newFavEl);
+}
+
+
+// listen for clicks on clear user data button
+document.querySelector("#clear-data").addEventListener("click", function (event) {
+    clearUserData();
+});
+
+
 // listen for clicks on weather search button and call function to get cityName inout by user
 document.querySelector("#search-button").addEventListener("click", function (e) {
     e.preventDefault();
@@ -277,7 +310,7 @@ document.querySelector('.favourites').addEventListener("click", function (event)
 
 // listen for clicks on news category button and call function to fetch appropriate news
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
-    e.preventDefault();
+    // e.preventDefault();
     e.target.classList.add("selected-news");
     getNewsCategory();
 });
