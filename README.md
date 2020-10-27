@@ -10,7 +10,7 @@
 5. moment.js
 6. materialize.css
 7. Guardian News API
-8. OpenWeather API
+8. WeatherBit API
 9. charts.js
 
 **Key Features:**
