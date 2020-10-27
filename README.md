@@ -14,13 +14,24 @@
 9. charts.js
 
 **Key Features:**
-1. User is prompted to provide their name and current city on their first visit to the WebApp. (in development)
-2. This information is used to provide a warm greeting on the banner at the top of the page and to get weather for the user provided city. (in development)
-3. Cities provided to the weather search are stored to a history/favourites list for easy recall and to localstorage for reloads of the WebApp or return visits to the page.
-4. A beautiful graph showing the forecasted maximum temperatures for the next 5-Days.
-5. User can request news in one of five (5) categories by clicking the appropriate button in the news section. This will fetch and present the top four (4) news articles in that category from the Guardian News API for TODAY (user's current day) on a carousel, two articles at a time. Clicking a News Category button replaces the currently loaded articles with content returned from a new fetch.
-6. When a user selects a News Category, the selected News Category is saved to localstorage. The news is then fetched and presented as four (4) cards using this News Category. On reloads/revisits of the to the page the saved recent news category and presented autmatically. If there is no data for recent News Category in localstorage, a message is displaed asking the user to select a News Category.
+1. Searching a city will a beautiful graph showing the forecasted hourly temperature changes.
+2. The **Collapsible** Favourites section will store up to a maximum of five (5) recently searched cities.
+3. Clicking on a favourite will display weather for that favourite
+4. User can request news in one of five (5) categories by clicking the appropriate button in the news section. This will fetch and present the top four (4) news articles in that category from the Guardian News API for TODAY (user's current day). Clicking a News Category button replaces the currently loaded articles with content returned from a new fetch.
+5. On reloads/revisits of the to the page, data for the most recently selected news category and most recent searched city are presented autmatically. If there is no data for recent News Category in localstorage, a message is displaed asking the user to select a News Category and / or to search a city.
+6. User can click the "Reset App" button to clear the screen of all displayed items and clear localstorage of all saved data.
+
+**Features for future consideration**
+1. User is prompted to provide their name and current city on their first visit to the WebApp.
+2. Request access to user's location and use it prepopulate the weather forecast
+3. Create a second page where user can "free search" news articles, not restricted to the initial five (5) categories we provide.
 
 Application URL: https://leggeamy.github.io/Daily-Dashboard/
 
 Application image: ![Daily-Dashbaord Screenshot](assets/images/daily_dashboard_ss.png "Daily-Dashboard Screenshot")
+
+
+**TeamOne:**
+1. Amy Legge
+2. Tomasso D'Odidio
+3. Sterlyn Kong
