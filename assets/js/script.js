@@ -132,13 +132,15 @@ function storeFavouriteCities(cityName) {
                 favCities.push(cityName);
                 // store favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
+                // clear favourites element and rebuild with new favCities
+                document.querySelector('.favourites').textContent = "";
                 favCities.forEach(makeFavouriteElement);
             }
             else {
                 // remove cityName currently being processed from favCities
                 favCities.splice(favCities.indexOf(cityName), 1);
                 // add cityName currently being processed as last item in favCtites
-                favCities.splice((favCities.length - 1), 0, cityName);
+                favCities.splice((favCities.length), 0, cityName);
                 // add favCities to local storage
                 localStorage.setItem("favCities", JSON.stringify(favCities));
                 // rebuild favourites element with new favCities
@@ -173,11 +175,6 @@ function getForecast(cityName) {
     }).then(function (data) {
         // check that passed data is not null
         if (!(data == null)) {
-
-            var chartEl = document.querySelector("#myChart")
-            var clearChartEl = document.createElement("canvas");
-            clearChartEl.setAttribute("id", "myChart");
-            chartEl.appendChild(clearChartEl); 
 
             // create chart and display it on the page
             (function makeChart() {
@@ -281,28 +278,15 @@ function clearUserData () {
     document.querySelector("#article-display").textContent = "";
     var newsPromptContainerEl = document.querySelector("#article-display");
     var newsPromptEl = document.createElement("h4");
-
-    newsPromptEl.textContent = "Please Select a News Category";
+    newsPromptEl.textContent = "PLEASE SELECT A NEWS CATEGORY";
     newsPromptContainerEl.appendChild(newsPromptEl);
-
      // clear the chart showing previous data
      var chartEl = document.querySelector("#myChart")
      var clearChartEl = document.createElement("canvas");
      clearChartEl.setAttribute("id", "myChart");
      chartEl.replaceWith(clearChartEl);
-
-    //   // prompt search for a city if none are selected
-    document.querySelector("#chartDiv").textContent = "";
-    var weatherPromptContainerEl = document.querySelector("#chartDiv");
-    var weatherPromptEl = document.createElement("h4");
-    weatherPromptEl.textContent = "Please Search for a City";
-    weatherPromptContainerEl.appendChild(weatherPromptEl);
-     
-    // clear favourites
-     var favEl = document.querySelector(".favourites");
-     var newFavEl = document.createElement("ul");
-     newFavEl.classList.add("list-group", "favourites");
-     favEl.replaceWith(newFavEl);
+     // clear favourites
+     document.querySelector(".favourites").textContent = "";     
 }
 
 
@@ -320,12 +304,12 @@ document.querySelector("#search-button").addEventListener("click", function (e) 
 
 // listen for clicks on items in favourites and call function to get forecast
 document.querySelector('.favourites').addEventListener("click", function (event) {
+    console.log(event.target);
     getForecast(event.target.textContent);
 });
 
 // listen for clicks on news category button and call function to fetch appropriate news
 document.querySelector("#myBtnContainer").addEventListener("click", function (e) {
-    // e.preventDefault();
     e.target.classList.add("selected-news");
     getNewsCategory();
 });
